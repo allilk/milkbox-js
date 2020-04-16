@@ -1,13 +1,23 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component, Fragment } from 'react';
+import ReactDOM from 'react-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from '../store';
 
-import GetFiles from './files/GetFiles'
+import FileBrowser from './files/FileBrowser';
 
-const App = () => {
-    const folderID = '17ZQacYVhoVuOTlf4sQ3aquX2CV5X5QcV';
-    return <div className="grid grid-cols-1 gap-1">
-         {GetFiles(folderID)}
-    </div>
+class App extends Component {
+    render() {
+      return (
+        <Provider store={store}>
+          <Router>
+            <Fragment>
+              <Route exact path="/files/" component={FileBrowser} />
+            </Fragment>
+          </Router>
+        </Provider>
+      )
+    }
   }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'));

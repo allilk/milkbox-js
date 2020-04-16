@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from frontend.config import DB_PSW, DEBUG
+from frontend.config import DB_PSW, DEBUG, SECRET_KEY
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'rest_framework_api_key',
     'django_filters',
     'corsheaders',
+    'knox',
     'frontend.apps.FrontendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django-ui',
+        'NAME': 'milkbox',
         'USER': 'postgres',
         'PASSWORD': DB_PSW,
         'HOST': '127.0.0.1',
@@ -129,7 +130,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend',],
+    'DEFAULT_AUTHENTICATION_CLASSES':('knox.auth.TokenAuthentication',)
     # "DEFAULT_PERMISSION_CLASSES": [
     #     "rest_framework_api_key.permissions.HasAPIKey",
     # ],

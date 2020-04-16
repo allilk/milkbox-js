@@ -9,7 +9,8 @@ const GetFiles = (folderId) => {
         credentials: 'same-origin',
         headers: {
           'X-CSRFToken': Cookies.get('crsftoken'),
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization':'Token cab55363c45a54a5e5aa03f0801500f4c1e9cfde67bd749c5e592e905f1a4668'
         }
       })
       const jsonData = await response.json()
